@@ -32,12 +32,15 @@ export default function index() {
           />
           {!pwCustomHook.isValid && <p>8자리 이상이여야 합니다.</p>}
         </label>
-        <button data-testid="signup-button" type="submit">
+        <button
+          data-testid="signup-button"
+          type="submit"
+          disabled={!pwCustomHook.isValid || !emailCustomHook.isValid}
+          onClick={() => console.log("disabled test")}
+        >
           가입하기
         </button>
       </div>
     </div>
   );
 }
-
-//   const pattern = /^.{8,}$/;
