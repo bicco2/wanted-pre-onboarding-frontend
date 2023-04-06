@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# 기능구현
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 로그인/ 회원가입
 
-## Available Scripts
+1. 회원가입 , 로그인 유효성 검사
 
-In the project directory, you can run:
+- 이메일 조건: @ 포함
+- 비밀번호 조건: 8자 이상
+- 하나라도 유효성 검사를 통과하지 못한다면 button에 disabled 속성을 부여해주세요
 
-### `yarn start`
+2. 회원가입 완료 => 로그인 페이지로 이동
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3. 로그인 완료 => todo 페이지로 이동
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 로그인 API는 로그인이 성공했을 시 Response Body에 JWT를 포함해서 응답합니다.
+- 응답받은 JWT는 로컬 스토리지에 저장해주세요
 
-### `yarn test`
+4. 리다이렉트 구현
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 로컬 스토리지에 토큰 o => /signin 또는 /signup 페이지에 접속한다면 /todo 경로로 리다이렉트
+- 로컬 스토리지에 토큰 x => /todo페이지에 접속한다면 /signin 경로로 리다이렉트 시켜주세요
 
-### `yarn build`
+## 투두리스트
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. /todo 에는 리스트 목록이 보이도록
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- todo 내용 + 완료 여부 표시 + 수정 + 삭제
+- 수정시 => 제출과 취소 버튼 생성
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. todolist 추가할수있는 input과 button 만들기
 
-### `yarn eject`
+- TODO 입력 input에는 data-testid="new-todo-input" 속성을 부여해주세요
+- TODO 추가 button에는 data-testid="new-todo-add-button" 속성을 부여해주세요
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+7. 체크박스로 완료 여부
