@@ -1,11 +1,37 @@
-import React from "react";
-import "./index.scss";
+import React, { useState } from "react";
 import { UseInputValidation } from "../../hooks/useInputValidation";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function index() {
+import { API_BASE_URL } from "../../constants/constants";
+import "./index.scss";
+type FormData = {
+  email: String;
+  password: String;
+};
+
+export default function SignUpPage() {
   const emailCustomHook = UseInputValidation(/@/g);
   const pwCustomHook = UseInputValidation(/^.{8,}$/);
 
+  const navigate = useNavigate();
+
+  const handleBtn = async () => {
+    try {
+      await axios.post(
+        `${API_BASE_URL}/auth/signup`,
+        {
+          email: emailCustomHook.value,
+          password: pwCustomHook.value,
+        } as FormData,
+        { headers: { "Content-Type": "application/json" } }
+      );
+      navigate("/signin");
+    } catch (error) {
+      alert("error");
+      console.error(error);
+    }
+  };
   return (
     <div className="container">
       <h1 className="title">회원가입</h1>
@@ -15,7 +41,6 @@ export default function index() {
           <input
             data-testid="email-input"
             type="email"
-            value={emailCustomHook.value}
             onChange={emailCustomHook.handleChange}
             placeholder="이메일을 입력해주세요"
           />
@@ -26,7 +51,6 @@ export default function index() {
           <input
             data-testid="password-input"
             type="password"
-            value={pwCustomHook.value}
             onChange={pwCustomHook.handleChange}
             placeholder="비밀번호를 입력해주세요"
           />
@@ -36,7 +60,7 @@ export default function index() {
           data-testid="signup-button"
           type="submit"
           disabled={!pwCustomHook.isValid || !emailCustomHook.isValid}
-          onClick={() => console.log("disabled test")}
+          onClick={handleBtn}
         >
           가입하기
         </button>
