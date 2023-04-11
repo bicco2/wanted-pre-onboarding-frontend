@@ -2,8 +2,8 @@ import axios from "axios";
 import { API_BASE_URL } from "../constants/constants";
 
 type FormData = {
-  email: String;
-  password: String;
+  email: string;
+  password: string;
 };
 
 export const SignUpHook = async (data: FormData) => {
@@ -42,3 +42,5 @@ export const HasToken = () => {
     return false;
   }
 };
+
+export const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
