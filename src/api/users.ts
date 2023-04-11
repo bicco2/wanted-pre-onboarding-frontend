@@ -34,3 +34,11 @@ export const SignInHook = async (data: FormData) => {
     console.error(error);
   }
 };
+
+export const HasToken = () => {
+  if (localStorage.getItem("ACCESS_TOKEN")) {
+    return true;
+  } else {
+    return false;
+  }
+};

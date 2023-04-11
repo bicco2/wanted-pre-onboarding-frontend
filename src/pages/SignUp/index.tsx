@@ -1,9 +1,9 @@
 import "./index.scss";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { UseInputValidation } from "../../hooks/useInputValidation";
-import { SignUpHook } from "../../api/users";
+import { HasToken, SignUpHook } from "../../api/users";
 
 export default function SignUpPage() {
   const emailCustomHook = UseInputValidation(/@/g);
@@ -21,6 +21,10 @@ export default function SignUpPage() {
       navigate("/signin");
     }
   };
+
+  if (HasToken()) {
+    return <Navigate to="/todo" />;
+  }
 
   return (
     <div className="container">
