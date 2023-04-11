@@ -1,0 +1,36 @@
+import axios from "axios";
+import { API_BASE_URL } from "../constants/constants";
+
+type FormData = {
+  email: String;
+  password: String;
+};
+
+export const SignUpHook = async (data: FormData) => {
+  try {
+    await axios.post(`${API_BASE_URL}/auth/signup`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return true;
+  } catch (error) {
+    alert("error");
+    console.error(error);
+  }
+};
+
+export const SignInHook = async (data: FormData) => {
+  try {
+    await axios
+      .post(`${API_BASE_URL}/auth/signin`, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res.data.access_token);
+        localStorage.setItem("ACCESS_TOKEN", res.data.access_token);
+      });
+    return true;
+  } catch (error) {
+    alert("error");
+    console.error(error);
+  }
+};

@@ -1,14 +1,9 @@
+import "./index.scss";
 import React from "react";
-import { UseInputValidation } from "../../hooks/useInputValidation";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { API_BASE_URL } from "../../constants/constants";
-import "./index.scss";
-type FormData = {
-  email: String;
-  password: String;
-};
+import { UseInputValidation } from "../../hooks/useInputValidation";
+import { SignUpHook } from "../../api/users";
 
 export default function SignUpPage() {
   const emailCustomHook = UseInputValidation(/@/g);
@@ -17,21 +12,16 @@ export default function SignUpPage() {
   const navigate = useNavigate();
 
   const handleBtn = async () => {
-    try {
-      await axios.post(
-        `${API_BASE_URL}/auth/signup`,
-        {
-          email: emailCustomHook.value,
-          password: pwCustomHook.value,
-        } as FormData,
-        { headers: { "Content-Type": "application/json" } }
-      );
+    const apiResponse = await SignUpHook({
+      email: emailCustomHook.value,
+      password: pwCustomHook.value,
+    });
+    if (apiResponse) {
+      alert("success");
       navigate("/signin");
-    } catch (error) {
-      alert("error");
-      console.error(error);
     }
   };
+
   return (
     <div className="container">
       <h1 className="title">회원가입</h1>

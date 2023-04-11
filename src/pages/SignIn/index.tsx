@@ -1,15 +1,9 @@
+import "./index.scss";
 import React from "react";
-import { UseInputValidation } from "../../hooks/useInputValidation";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { API_BASE_URL } from "../../constants/constants";
-import "./index.scss";
-
-type FormData = {
-  email: String;
-  password: String;
-};
+import { UseInputValidation } from "../../hooks/useInputValidation";
+import { SignInHook } from "../../api/users";
 
 export default function SignInPage() {
   const emailCustomHook = UseInputValidation(/@/g);
@@ -18,26 +12,16 @@ export default function SignInPage() {
   const navigate = useNavigate();
 
   const handleBtn = async () => {
-    try {
-      await axios
-        .post(
-          `${API_BASE_URL}/auth/signin`,
-          {
-            email: emailCustomHook.value,
-            password: pwCustomHook.value,
-          } as FormData,
-          { headers: { "Content-Type": "application/json" } }
-        )
-        .then((res) => {
-          console.log(res.data.access_token);
-          localStorage.setItem("ACCESS_TOKEN", res.data.access_token);
-        });
+    const apiResponse = await SignInHook({
+      email: emailCustomHook.value,
+      password: pwCustomHook.value,
+    });
+    if (apiResponse) {
+      alert("success");
       navigate("/todo");
-    } catch (error) {
-      alert("error");
-      console.error(error);
     }
   };
+
   return (
     <div className="container">
       <h1 className="title">로그인</h1>
