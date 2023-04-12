@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-
+import { TodoItem } from "../../constants/types";
 import axios from "axios";
 import { API_BASE_URL } from "../../constants/constants";
 import { GET_ACCESS_TOKEN } from "../../api/users";
@@ -8,13 +8,6 @@ import {
   GetTodoHook,
   UpdateCheckBoxHook,
 } from "../../api/todos";
-
-type TodoItem = {
-  id: number;
-  isCompleted: boolean;
-  userId: number;
-  todo: string;
-};
 
 export default function TodoPage() {
   const [todoListData, setTodoListData] = useState<TodoItem[]>([]);

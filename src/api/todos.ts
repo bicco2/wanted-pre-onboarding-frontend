@@ -1,14 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "../constants/constants";
-
+import { TodoItem } from "../constants/types";
 import { GET_ACCESS_TOKEN } from "../api/users";
-
-type TodoItem = {
-  id: number;
-  isCompleted: boolean;
-  userId: number;
-  todo: string;
-};
 
 type CreateTodoHookType = (
   todo: string,
