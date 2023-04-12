@@ -25,6 +25,32 @@ export default function TodoPage() {
     GetTodoHook(setTodoListData);
   }, []);
 
+  const test = async (target: any, id: number) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
+      },
+    };
+
+    const findIndex = todoListData.findIndex((element) => element.id === id);
+
+    try {
+      await axios.put(
+        `${API_BASE_URL}/todos/${id}`,
+        {
+          todo: `${todoListData[findIndex].todo}`,
+          isCompleted: target.checked,
+        },
+        config
+      );
+      GetTodoHook(setTodoListData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(todoListData, "afs");
+
   return (
     <div>
       <input data-testid="new-todo-input" onChange={onTodoEnter} />
@@ -37,7 +63,13 @@ export default function TodoPage() {
       {todoListData.map((item: TodoItem, index) => (
         <li key={item.id}>
           <label>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={item.isCompleted}
+              onChange={({ target }) => {
+                test(target, item.id);
+              }}
+            />
             <span> {item.todo}</span>
           </label>
           <button data-testid="modify-button">수정</button>
