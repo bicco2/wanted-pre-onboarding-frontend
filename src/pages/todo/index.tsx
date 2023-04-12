@@ -7,6 +7,7 @@ import {
   CreateTodoHook,
   GetTodoHook,
   UpdateCheckBoxHook,
+  DeleteTodoHook,
 } from "../../api/todos";
 
 export default function TodoPage() {
@@ -51,7 +52,12 @@ export default function TodoPage() {
             <span> {item.todo}</span>
           </label>
           <button data-testid="modify-button">수정</button>
-          <button data-testid="delete-button">삭제</button>
+          <button
+            data-testid="delete-button"
+            onClick={() => DeleteTodoHook(item.id, setTodoListData)}
+          >
+            삭제
+          </button>
         </li>
       ))}
     </div>

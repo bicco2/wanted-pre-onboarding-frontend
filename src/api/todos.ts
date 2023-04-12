@@ -88,3 +88,21 @@ export const UpdateCheckBoxHook: UpdateTodoHookType = async (
     console.error(error);
   }
 };
+
+export const DeleteTodoHook = async (
+  id: number,
+  setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
+) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
+    },
+  };
+
+  try {
+    await axios.delete(`${API_BASE_URL}/todos/${id}`, config);
+    GetTodoHook(setTodoListData);
+  } catch (error) {
+    console.error(error);
+  }
+};
