@@ -10,8 +10,36 @@ type TodoItem = {
   userId: number;
   todo: string;
 };
+
 export default function TodoPage() {
-  const [data, setData] = useState([]);
+  const [todoListData, setTodoListData] = useState<TodoItem[]>([]);
+  const [todo, setTodo] = useState("");
+
+  const onTodoChange = (e: any) => {
+    setTodo(e.target.value);
+  };
+
+  const handleAddBtn = async () => {
+    try {
+      await axios
+        .post(
+          `${API_BASE_URL}/todos`,
+          { todo: todo },
+          {
+            headers: {
+              Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setTodoListData([...todoListData, res.data]);
+        });
+    } catch (error) {
+      alert("error");
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const config = {
@@ -23,24 +51,27 @@ export default function TodoPage() {
     axios
       .get(`${API_BASE_URL}/todos`, config)
       .then((response) => {
-        setData(response.data);
+        setTodoListData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  console.log(data, "tododata");
   return (
     <div>
-      <input data-testid="new-todo-input" />
-      <button data-testid="new-todo-add-button">추가</button>
-      {data.map((item: TodoItem, index) => (
-        <li>
+      <input data-testid="new-todo-input" onChange={onTodoChange} />
+      <button data-testid="new-todo-add-button" onClick={handleAddBtn}>
+        추가
+      </button>
+      {todoListData.map((item: TodoItem, index) => (
+        <li key={item.id}>
           <label>
             <input type="checkbox" />
             <span> {item.todo}</span>
           </label>
+          <button data-testid="modify-button">수정</button>
+          <button data-testid="delete-button">삭제</button>
         </li>
       ))}
     </div>
