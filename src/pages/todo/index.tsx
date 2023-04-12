@@ -3,12 +3,7 @@ import { TodoItem } from "../../constants/types";
 import axios from "axios";
 import { API_BASE_URL } from "../../constants/constants";
 import { GET_ACCESS_TOKEN } from "../../api/users";
-import {
-  CreateTodoHook,
-  GetTodoHook,
-  UpdateCheckBoxHook,
-  DeleteTodoHook,
-} from "../../api/todos";
+import { CreateTodoHook, GetTodoHook } from "../../api/todos";
 import TodoComponent from "../../components/TodoComponent";
 
 export default function TodoPage() {
@@ -36,40 +31,13 @@ export default function TodoPage() {
         추가
       </button>
       {todoListData.map((item: TodoItem, index) => (
-        // <li key={item.id}>
-        //   <label>
-        //     <input
-        //       type="checkbox"
-        //       checked={item.isCompleted}
-        //       onChange={({ target }) => {
-        //         UpdateCheckBoxHook(
-        //           target,
-        //           item.id,
-        //           todoListData,
-        //           setTodoListData
-        //         );
-        //       }}
-        //     />
-        //     <span> {item.todo}</span>
-        //   </label>
-        //   <button data-testid="modify-button">수정</button>
-        //   <button
-        //     data-testid="delete-button"
-        //     onClick={() => DeleteTodoHook(item.id, setTodoListData)}
-        //   >
-        //     삭제
-        //   </button>
-        //   <TodoComponent
-        //     {...[item, todoListData, setTodoListData]}
-        //   />
-        // </li>
         <TodoComponent
+          key={item.id}
           info={{
             item: item,
             todoListData: todoListData,
             setTodoListData: setTodoListData,
           }}
-          // {...[item, todoListData, setTodoListData]}
         />
       ))}
     </div>

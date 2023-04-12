@@ -53,7 +53,9 @@ export default function TodoComponent(props: Props) {
           </button>
           <button
             data-testid="delete-button"
-            // onClick={() => DeleteTodoHook(item.id, setTodoListData)}
+            onClick={() =>
+              DeleteTodoHook(props.info.item.id, props.info.setTodoListData)
+            }
           >
             삭제
           </button>
