@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 
 import axios from "axios";
 import { API_BASE_URL } from "../../constants/constants";
 import { GET_ACCESS_TOKEN } from "../../api/users";
+import { CreateTodoHook, GetTodoHook } from "../../api/todos";
 
 type TodoItem = {
   id: number;
@@ -15,53 +16,22 @@ export default function TodoPage() {
   const [todoListData, setTodoListData] = useState<TodoItem[]>([]);
   const [todo, setTodo] = useState("");
 
-  const onTodoChange = (e: any) => {
+  // uninput 입력시 적용 함수
+  const onTodoEnter = (e: ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
   };
 
-  const handleAddBtn = async () => {
-    try {
-      await axios
-        .post(
-          `${API_BASE_URL}/todos`,
-          { todo: todo },
-          {
-            headers: {
-              Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          setTodoListData([...todoListData, res.data]);
-        });
-    } catch (error) {
-      alert("error");
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
-      },
-    };
-
-    axios
-      .get(`${API_BASE_URL}/todos`, config)
-      .then((response) => {
-        setTodoListData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    GetTodoHook(setTodoListData);
   }, []);
 
   return (
     <div>
-      <input data-testid="new-todo-input" onChange={onTodoChange} />
-      <button data-testid="new-todo-add-button" onClick={handleAddBtn}>
+      <input data-testid="new-todo-input" onChange={onTodoEnter} />
+      <button
+        data-testid="new-todo-add-button"
+        onClick={() => CreateTodoHook(todo, todoListData, setTodoListData)}
+      >
         추가
       </button>
       {todoListData.map((item: TodoItem, index) => (
