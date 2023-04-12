@@ -10,13 +10,20 @@ type TodoItem = {
   todo: string;
 };
 
-type TodoCreateHookType = (
+type CreateTodoHookType = (
   todo: string,
   todoListData: TodoItem[],
   setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
 ) => void;
 
-export const CreateTodoHook: TodoCreateHookType = async (
+type UpdateTodoHookType = (
+  target: HTMLInputElement,
+  id: number,
+  todoListData: TodoItem[],
+  setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
+) => void;
+
+export const CreateTodoHook: CreateTodoHookType = async (
   todo,
   todoListData,
   setTodoListData
@@ -55,6 +62,35 @@ export const GetTodoHook = async (
     await axios.get(`${API_BASE_URL}/todos`, config).then((response) => {
       setTodoListData(response.data);
     });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const UpdateCheckBoxHook: UpdateTodoHookType = async (
+  target,
+  id,
+  todoListData,
+  setTodoListData
+) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
+    },
+  };
+
+  const findIndex = todoListData.findIndex((element) => element.id === id);
+
+  try {
+    await axios.put(
+      `${API_BASE_URL}/todos/${id}`,
+      {
+        todo: `${todoListData[findIndex].todo}`,
+        isCompleted: target.checked,
+      },
+      config
+    );
+    GetTodoHook(setTodoListData);
   } catch (error) {
     console.error(error);
   }

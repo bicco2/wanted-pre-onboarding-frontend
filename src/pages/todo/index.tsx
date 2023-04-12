@@ -3,7 +3,11 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../../constants/constants";
 import { GET_ACCESS_TOKEN } from "../../api/users";
-import { CreateTodoHook, GetTodoHook } from "../../api/todos";
+import {
+  CreateTodoHook,
+  GetTodoHook,
+  UpdateCheckBoxHook,
+} from "../../api/todos";
 
 type TodoItem = {
   id: number;
@@ -25,31 +29,7 @@ export default function TodoPage() {
     GetTodoHook(setTodoListData);
   }, []);
 
-  const test = async (target: any, id: number) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
-      },
-    };
-
-    const findIndex = todoListData.findIndex((element) => element.id === id);
-
-    try {
-      await axios.put(
-        `${API_BASE_URL}/todos/${id}`,
-        {
-          todo: `${todoListData[findIndex].todo}`,
-          isCompleted: target.checked,
-        },
-        config
-      );
-      GetTodoHook(setTodoListData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  console.log(todoListData, "afs");
+  // console.log(todoListData, "afs");
 
   return (
     <div>
@@ -67,7 +47,12 @@ export default function TodoPage() {
               type="checkbox"
               checked={item.isCompleted}
               onChange={({ target }) => {
-                test(target, item.id);
+                UpdateCheckBoxHook(
+                  target,
+                  item.id,
+                  todoListData,
+                  setTodoListData
+                );
               }}
             />
             <span> {item.todo}</span>
