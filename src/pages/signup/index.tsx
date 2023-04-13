@@ -1,5 +1,5 @@
 import "./styles.scss";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { UseInputValidation } from "../../hooks/useinputvalidation";
 import { HasToken, SignUpHook } from "../../api/users";
@@ -57,6 +57,7 @@ export default function SignUpPage() {
         >
           가입하기
         </button>
+        <Link to="/signin">로그인하러가기</Link>
       </div>
     </div>
   );

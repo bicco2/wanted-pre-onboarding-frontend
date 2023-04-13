@@ -14,7 +14,7 @@ export const SignUpHook = async (data: FormData) => {
     });
     return true;
   } catch (error) {
-    alert("error");
+    alert("중복된 아이디입니다");
     console.error(error);
   }
 };
