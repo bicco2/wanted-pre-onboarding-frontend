@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 import { TodoItem } from "../../constants/types";
 import { CreateTodoHook, GetTodoHook } from "../../api/todos";
-import TodoComponent from "../../components/TodoComponent";
+import TodoComponent from "../../components/todocomponent";
 import { HasToken } from "../../api/users";
 
 export default function TodoPage() {

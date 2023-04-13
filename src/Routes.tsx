@@ -1,10 +1,10 @@
 import { lazy } from "react";
 import GlobalLayout from "./pages/_layout";
 
-const SignInPage = lazy(() => import("./pages/SignIn"));
-const SignUpPage = lazy(() => import("./pages/SignUp"));
-const HomePage = lazy(() => import("./pages/Home"));
-const TodoPage = lazy(() => import("./pages/Todo"));
+const SignInPage = lazy(() => import("./pages/signin"));
+const SignUpPage = lazy(() => import("./pages/signup"));
+const HomePage = lazy(() => import("./pages/home"));
+const TodoPage = lazy(() => import("./pages/todo"));
 
 export const routes = [
   {
