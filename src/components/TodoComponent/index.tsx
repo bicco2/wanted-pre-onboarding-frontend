@@ -1,12 +1,12 @@
 import "./index.scss";
-
 import React, { useState } from "react";
+
+import { TodoItem } from "../../constants/types";
 import {
   UpdateCheckBoxHook,
   DeleteTodoHook,
   UpdateTodoHook,
 } from "../../api/todos";
-import { TodoItem } from "../../constants/types";
 
 type Props = {
   info: {

@@ -1,9 +1,10 @@
 import "./index.scss";
 import { useState, useEffect, ChangeEvent } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+
 import { TodoItem } from "../../constants/types";
 import { CreateTodoHook, GetTodoHook } from "../../api/todos";
 import TodoComponent from "../../components/TodoComponent";
-import { Navigate, useNavigate } from "react-router-dom";
 import { HasToken } from "../../api/users";
 
 export default function TodoPage() {
