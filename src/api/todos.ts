@@ -108,8 +108,6 @@ export const UpdateTodoHook: UpdateTodoHookType = async (
     },
   };
 
-  console.log(value, "event"); // 뭘 넘겨야되지 ?>?
-
   try {
     await axios.put(
       `${API_BASE_URL}/todos/${item.id}`,

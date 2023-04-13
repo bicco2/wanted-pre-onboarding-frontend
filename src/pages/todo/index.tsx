@@ -1,8 +1,5 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { TodoItem } from "../../constants/types";
-import axios from "axios";
-import { API_BASE_URL } from "../../constants/constants";
-import { GET_ACCESS_TOKEN } from "../../api/users";
 import { CreateTodoHook, GetTodoHook } from "../../api/todos";
 import TodoComponent from "../../components/TodoComponent";
 
@@ -19,8 +16,6 @@ export default function TodoPage() {
     GetTodoHook(setTodoListData);
   }, []);
 
-  // console.log(todoListData, "afs");
-
   return (
     <div>
       <input data-testid="new-todo-input" onChange={onTodoEnter} />
@@ -30,7 +25,7 @@ export default function TodoPage() {
       >
         추가
       </button>
-      {todoListData.map((item: TodoItem, index) => (
+      {todoListData.map((item: TodoItem) => (
         <TodoComponent
           key={item.id}
           info={{
