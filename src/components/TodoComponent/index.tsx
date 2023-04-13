@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./styles.scss";
 import React, { useState } from "react";
 
 import { TodoItem } from "../../constants/types";

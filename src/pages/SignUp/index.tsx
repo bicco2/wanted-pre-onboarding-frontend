@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./styles.scss";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import { UseInputValidation } from "../../hooks/useinputvalidation";

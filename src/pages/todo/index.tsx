@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./styles.scss";
 import { useState, useEffect, ChangeEvent } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
