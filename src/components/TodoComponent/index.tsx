@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { UpdateCheckBoxHook, DeleteTodoHook } from "../../api/todos";
+import {
+  UpdateCheckBoxHook,
+  DeleteTodoHook,
+  UpdateTodoHook,
+} from "../../api/todos";
 import { TodoItem } from "../../constants/types";
 
 type Props = {
@@ -11,16 +15,35 @@ type Props = {
 };
 
 export default function TodoComponent(props: Props) {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(props.info.item.todo);
 
   return (
     <li key={props.info.item.id}>
       {active ? (
         <>
           <label>
-            <input data-testid="modify-input" value={props.info.item.todo} />
+            <input
+              data-testid="modify-input"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
           </label>
-          <button data-testid="submit-button">제출</button>
+          <button
+            data-testid="submit-button"
+            onClick={(e) => {
+              UpdateTodoHook(
+                inputValue,
+                props.info.item,
+                props.info.todoListData,
+                props.info.setTodoListData
+              );
+
+              setActive(!active);
+            }}
+          >
+            제출
+          </button>
           <button
             data-testid="cancel-button"
             onClick={() => setActive(!active)}

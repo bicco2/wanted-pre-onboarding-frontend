@@ -9,9 +9,16 @@ type CreateTodoHookType = (
   setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
 ) => void;
 
-type UpdateTodoHookType = (
+type UpdateCheckBoxHookType = (
   target: HTMLInputElement,
   id: number,
+  todoListData: TodoItem[],
+  setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
+) => void;
+
+type UpdateTodoHookType = (
+  value: any,
+  item: TodoItem,
   todoListData: TodoItem[],
   setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
 ) => void;
@@ -60,7 +67,7 @@ export const GetTodoHook = async (
   }
 };
 
-export const UpdateCheckBoxHook: UpdateTodoHookType = async (
+export const UpdateCheckBoxHook: UpdateCheckBoxHookType = async (
   target,
   id,
   todoListData,
@@ -80,6 +87,35 @@ export const UpdateCheckBoxHook: UpdateTodoHookType = async (
       {
         todo: `${todoListData[findIndex].todo}`,
         isCompleted: target.checked,
+      },
+      config
+    );
+    GetTodoHook(setTodoListData);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const UpdateTodoHook: UpdateTodoHookType = async (
+  value,
+  item,
+  todoListData,
+  setTodoListData
+) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
+    },
+  };
+
+  console.log(value, "event"); // 뭘 넘겨야되지 ?>?
+
+  try {
+    await axios.put(
+      `${API_BASE_URL}/todos/${item.id}`,
+      {
+        todo: value,
+        isCompleted: item.isCompleted,
       },
       config
     );
