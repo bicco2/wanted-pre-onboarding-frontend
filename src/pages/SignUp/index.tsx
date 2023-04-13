@@ -1,7 +1,7 @@
 import "./index.scss";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { UseInputValidation } from "../../hooks/useInputValidation";
+import { UseInputValidation } from "../../hooks/useinputvalidation";
 import { HasToken, SignUpHook } from "../../api/users";
 
 export default function SignUpPage() {
