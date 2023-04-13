@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./styles.scss";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
