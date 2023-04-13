@@ -1,3 +1,47 @@
+# **원티드 프리온보딩**
+
+## 프론트엔드 인턴십 사전 과제
+
+<br>
+
+### 배포 링크
+
+---
+
+ㄴㅇㅁㄹ
+
+### 미리보기
+
+---
+
+ㅁㄴㅇㄹ
+
+### 프로젝트 실행 방법
+
+---
+
+#### 1. git clone <br>
+
+```bash
+git clone https://github.com/bicco2/wanted-pre-onboarding-frontend.git
+```
+
+#### 2. install
+
+```bash
+npm install
+```
+
+#### 3. start
+
+```bash
+npm start
+```
+
+<br>
+<br>
+<br>
+
 # 기능구현
 
 ## 로그인/ 회원가입
