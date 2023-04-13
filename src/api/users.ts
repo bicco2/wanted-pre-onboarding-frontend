@@ -42,5 +42,3 @@ export const HasToken = () => {
     return false;
   }
 };
-
-export const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");

@@ -1,3 +1,5 @@
+import "./index.scss";
+
 import React, { useState } from "react";
 import {
   UpdateCheckBoxHook,
@@ -19,7 +21,7 @@ export default function TodoComponent(props: Props) {
   const [inputValue, setInputValue] = useState<string>(props.info.item.todo);
 
   return (
-    <li key={props.info.item.id}>
+    <li className="liContainer" key={props.info.item.id}>
       {active ? (
         <>
           <label>

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../constants/constants";
 import { TodoItem } from "../constants/types";
-import { GET_ACCESS_TOKEN } from "../api/users";
 
 type CreateTodoHookType = (
   todo: string,
@@ -28,6 +27,7 @@ export const CreateTodoHook: CreateTodoHookType = async (
   todoListData,
   setTodoListData
 ) => {
+  const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
   try {
     await axios
       .post(
@@ -52,6 +52,7 @@ export const CreateTodoHook: CreateTodoHookType = async (
 export const GetTodoHook = async (
   setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
 ) => {
+  const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
   const config = {
     headers: {
       Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
@@ -73,6 +74,7 @@ export const UpdateCheckBoxHook: UpdateCheckBoxHookType = async (
   todoListData,
   setTodoListData
 ) => {
+  const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
   const config = {
     headers: {
       Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
@@ -102,6 +104,7 @@ export const UpdateTodoHook: UpdateTodoHookType = async (
   todoListData,
   setTodoListData
 ) => {
+  const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
   const config = {
     headers: {
       Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
@@ -127,6 +130,7 @@ export const DeleteTodoHook = async (
   id: number,
   setTodoListData: React.Dispatch<React.SetStateAction<TodoItem[]>>
 ) => {
+  const GET_ACCESS_TOKEN = localStorage.getItem("ACCESS_TOKEN");
   const config = {
     headers: {
       Authorization: `Bearer ${GET_ACCESS_TOKEN}`,
