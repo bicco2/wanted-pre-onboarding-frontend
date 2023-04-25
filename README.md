@@ -10,6 +10,8 @@
 
 > https://wanted-pre-onboarding-frontend-iota-seven.vercel.app/
 
+* 현재는 이용할 수 없는 url입니다.
+
 ### 데모
 
 ---
